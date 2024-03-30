@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Print values in an array using for loops, services is an array
+
+services=("loadbalancer" "virtualmachine" "storage" "vnet" "container")
+
+for i in "${services[@]}"
+do
+    echo $i
+done

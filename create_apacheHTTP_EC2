@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# A script that will star apache HTTP server on an EC2 instance
+
+yum update -y
+yum install -y httpd
+
+# Start and enable Apache HTTP server
+systemctl start httpd
+systemctl enable httpd
+
+# Create a simple HTML file to serve
+cat <<EOF > /var/www/html/index.html
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to my website</title>
+</head>
+<body>
+<h1>Hello from my EC2 instance</h1>
+</html>
+EOF
+
+# Restart Apache HTTP server to apply changes
+systemctl restart httpd

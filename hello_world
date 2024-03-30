@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# A script that will print out a message
+
+echo 'Hello, World!'
+

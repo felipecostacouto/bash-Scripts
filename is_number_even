@@ -1,0 +1,12 @@
+#!/bin/bash
+
+#A script that will determine if a number is a even
+
+number=3
+
+if [ $((number%2)) -eq 0 ];
+then
+    echo "The number $number is even!";
+else    
+    echo "The number $number is odd!";
+fi

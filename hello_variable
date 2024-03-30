@@ -1,0 +1,6 @@
+#!/bin/bash
+
+hello_message='Hello World!'
+current_dir=$(pwd)
+
+echo "$hello_message from $current_dir "

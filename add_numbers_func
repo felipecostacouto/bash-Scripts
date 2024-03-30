@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# script to learn functions
+
+check_even () {
+    local mod=2
+    echo "The value of mod is $mod"
+    if [ $(("$1" % $mod)) -eq 0 ]
+    then
+        echo "The number $1 is even!";
+    else
+        echo "The number $1 is odd!";
+    fi
+}
+
+read -p "Enter a number: " n
+
+check_even $n
+echo $mod
+
