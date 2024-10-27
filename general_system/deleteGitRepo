@@ -1,0 +1,40 @@
+#!/bin/bash
+
+read -r -p "Enter you GitHub username: " USERNAME
+read -sr -p "Enter your GitHub token: " TOKEN
+echo
+
+# List repositories
+echo "Fetching repositories for $USERNAME..."
+REPOS=$(curl -s -u "$USERNAME:$TOKEN" https://api.github.com/user/repos | jq -r '.[].name')
+
+if [ -z "$REPOS" ]; then
+    echo "No repositories found or failed to fetch repositories. Check your credentials and permissions."
+    exit 1
+fi
+
+# Display the list of repositories
+echo "Your repositories:"
+echo "$REPOS"
+echo  # This adds a blank line for separation
+
+# Prompt the user to enter a repository to delete
+read -r -p "Enter the name of the repository you want to delete: " REPO_NAME
+
+# Confirm deletion
+read -r -p "Are you sure you want to delete the repository '$REPO_NAME'? This action cannot be undone. (y/n): " CONFIRM
+
+if [[ "$CONFIRM" != "y" ]]; then
+    echo "Deletion canceled."
+    exit 0
+fi
+
+# Delete the repository
+DELETE_RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" -X DELETE -u "$USERNAME:$TOKEN" "https://api.github.com/repos/$USERNAME/$REPO_NAME")
+
+# Check if the deletion was successful
+if [ "$DELETE_RESPONSE" -eq 204 ]; then
+    echo "Repository '$REPO_NAME' deleted successfully."
+else
+    echo "Failed to delete repository '$REPO_NAME'. Please check if the repository exists and try again."
+fi

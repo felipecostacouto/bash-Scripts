@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# script to check the health of a server by monitoring CPU, memory and disk usage.
+
+#!/bin/bash
+echo "Checking CPU usage..."
+uptime
+
+echo "Checking Memory usage..."
+free -m
+
+echo "Checking Disk usage..."
+df -h
